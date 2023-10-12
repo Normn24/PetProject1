@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   updateFilter();
 
-
   loadingSpinner.className = "loading";
   loadMoreBtn.prepend(loadingSpinner);
 
