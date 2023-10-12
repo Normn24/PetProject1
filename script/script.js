@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { image: "./images/work21.jpg", tabContent: "workweb" },
   ];
 
-  const loadMoreBtn = document.querySelector(".load__btn");
+  const loadMoreBtn = document.querySelector("#work__btn");
   const workContent = document.querySelector(".work__content");
   const loadingSpinner = document.createElement("div");
 
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   loadingSpinner.className = "loading";
-  loadMoreBtn.appendChild(loadingSpinner);
+  loadMoreBtn.prepend(loadingSpinner);
 
   loadMoreBtn.addEventListener("click", function () {
     loadingSpinner.style.display = "block";
@@ -109,12 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
         uploadImg.src = workImage.image;
         uploadImg.setAttribute("data-tab-content", workImage.tabContent);
         uploadImg.className = "work__img";
-        workContent.appendChild(uploadImg);
+        workContent.append(uploadImg);
 
         imageIndex++;
       }
 
-      if (imageIndex === 24) {
+      if (imageIndex === workLoadImages.length) {
         loadMoreBtn.style.display = "none";
       }
 
@@ -218,53 +218,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
   leftBtn.addEventListener('click', prevSlide);
   rightBtn.addEventListener('click', nextSlide);
-});
 
 
 
-// Gallery section
-const galleryContent = document.querySelector('.gallery__content');
-const loadBtn = document.querySelector('#gallery__btn');
-const divLeft = document.querySelector(".gallery__left")
-const divMiddle = document.querySelector(".gallery__middle")
-const divRight = document.querySelector(".gallery__right")
-const loadingSpinner = document.createElement("div");
+  // Gallery section
+  const loadBtn = document.querySelector('#gallery__btn');
+  const divLeft = document.querySelector(".gallery__left")
+  const divMiddle = document.querySelector(".gallery__middle")
+  const divRight = document.querySelector(".gallery__right")
+  const loadingSpinnerGallery = document.createElement("div");
 
-const imagesToAdd = [
-  { location: divLeft, img: "./images/gallery20.png" },
-  { location: divMiddle, img: "./images/gallery21.png" },
-  { location: divRight, img: "./images/gallery19.png" },
-  { location: divLeft, img: "./images/gallery22.png" },
-  { location: divMiddle, img: "./images/gallery23.png" },
-  { location: divRight, img: "./images/gallery24.png" },
-];
+  const imagesToAdd = [
+    { location: divLeft, img: "./images/gallery20.png" },
+    { location: divMiddle, img: "./images/gallery21.png" },
+    { location: divRight, img: "./images/gallery19.png" },
+    { location: divLeft, img: "./images/gallery22.png" },
+    { location: divMiddle, img: "./images/gallery23.png" },
+    { location: divRight, img: "./images/gallery24.png" },
+  ];
 
-let clickCount = 0;
-let imgIndex = 0;
+  let clickCount = 0;
+  let imgIndex = 0;
 
-loadingSpinner.className = "loading";
-loadBtn.appendChild(loadingSpinner);
+  loadingSpinnerGallery.className = "loading";
+  loadBtn.prepend(loadingSpinnerGallery);
 
-loadBtn.addEventListener('click', function () {
-  loadingSpinner.style.display = "block";
+  loadBtn.addEventListener('click', function () {
+    loadingSpinnerGallery.style.display = "block";
 
-  setTimeout(function () {
-    loadingSpinner.style.display = "none";
+    setTimeout(function () {
+      loadingSpinnerGallery.style.display = "none";
 
-    for (let i = 0; i < imagesToAdd.length / 2; i++) {
-      const imgObject = imagesToAdd[imgIndex];
-      const imgGallery = document.createElement('img');
-      const div = imgObject.location;
+      for (let i = 0; i < imagesToAdd.length / 2; i++) {
+        const imgObject = imagesToAdd[imgIndex];
+        const imgGallery = document.createElement('img');
+        const div = imgObject.location;
 
-      imgGallery.src = imgObject.img;
-      imgGallery.className = ("gallery__new")
-      div.appendChild(imgGallery);
-      imgIndex++;
-    }
-    clickCount++;
+        imgGallery.src = imgObject.img;
+        imgGallery.className = ("gallery__new")
+        div.append(imgGallery);
+        imgIndex++;
+      }
+      clickCount++;
 
-    if (clickCount === 2) {
-      loadBtn.style.display = 'none';
-    }
-  }, 2000);
+      if (imgIndex === imagesToAdd.length) {
+        loadBtn.style.display = 'none';
+      }
+    }, 2000);
+  });
 });
